@@ -9,9 +9,37 @@
     .react-header {
         position: relative;
         z-index: 1000;
+        border-radius: 0 !important;
+        margin: 0 !important;
 
-        .logo img {
-            max-height: 70px;
+        .header-area {
+            border-radius: 0 !important;
+            padding: 0 !important;
+        }
+
+        .logo {
+            padding: 0;
+            margin: 0;
+            
+            img {
+                max-height: 50px;
+                width: auto;
+                display: block;
+            }
+        }
+
+        .react-main-menu {
+            padding: 6px 0;
+            min-height: auto;
+        }
+
+        .menu-part {
+            padding: 0;
+        }
+
+        // Hide topbar on tablet
+        .topbar-area.style1 {
+            display: none;
         }
 
         .menu-toggle {
@@ -163,8 +191,63 @@
     }
 
     /* Header */
-    .react-header .logo img {
-        max-height: 60px;
+    .react-header {
+        border-radius: 0 !important;
+        margin: 0 !important;
+        
+        .header-area {
+            border-radius: 0 !important;
+            padding: 0 !important;
+        }
+
+        .logo {
+            padding: 0;
+            margin: 0;
+            
+            img {
+                max-height: 40px;
+                width: auto;
+                display: block;
+            }
+        }
+
+        .react-main-menu {
+            padding: 5px 0;
+            min-height: auto;
+        }
+
+        .menu-part {
+            padding: 0;
+        }
+
+        .menu-toggle {
+            gap: 8px;
+            padding: 0 10px;
+        }
+
+        .mobile-menu-btn {
+            padding: 4px;
+            min-width: 32px;
+            
+            .icon-bar {
+                width: 24px;
+                height: 2.5px;
+            }
+        }
+
+        // Hide topbar on mobile
+        .topbar-area.style1 {
+            display: none !important;
+        }
+
+        // Optimize sticky header on mobile
+        .react-sticky {
+            padding: 0 !important;
+            
+            .react-main-menu {
+                padding: 5px 0 !important;
+            }
+        }
     }
 
     /* About */
@@ -314,13 +397,63 @@
     }
 
     /* Header */
-    .react-header .topbar-area.style1 {
-        .topbar-contact ul {
-            flex-direction: column;
-            gap: 10px;
+    .react-header {
+        .logo {
+            padding: 0;
+            margin: 0;
+            
+            img {
+                max-height: 35px;
+                width: auto;
+                display: block;
+            }
+        }
 
-            li {
-                margin-left: 0;
+        .react-main-menu {
+            padding: 4px 0;
+            min-height: 45px;
+        }
+
+        .menu-part {
+            padding: 0;
+        }
+
+        .menu-toggle {
+            gap: 6px;
+            padding: 0 8px;
+        }
+
+        .mobile-menu-btn {
+            padding: 3px;
+            min-width: 30px;
+            
+            .icon-bar {
+                width: 22px;
+                height: 2px;
+            }
+        }
+
+        .header-area {
+            padding: 0 !important;
+        }
+    }
+
+    .react-header {
+        .topbar-area.style1 {
+            display: none !important;
+        }
+
+        // Ensure header is compact on small mobile
+        .header-area {
+            padding: 0 !important;
+        }
+
+        .react-sticky {
+            padding: 0 !important;
+            
+            .react-main-menu {
+                padding: 4px 0 !important;
+                min-height: 42px;
             }
         }
     }

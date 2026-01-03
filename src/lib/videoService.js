@@ -38,32 +38,58 @@ export const fetchVideosFromBucket = async () => {
       return getFallbackVideos();
     }
 
-    // Get public URLs for each video
+    // Get signed URLs for each video (valid for 1 year to avoid expiration)
+    // Signed URLs work even if bucket is private
     const videos = await Promise.all(
       data
         .filter(file => file.name.endsWith('.mp4') || file.name.endsWith('.mov') || file.name.endsWith('.webm'))
         .map(async (file) => {
-          const { data: urlData } = supabase.storage
-            .from(BUCKET_NAME)
-            .getPublicUrl(file.name);
+          try {
+            // Try to get signed URL first (works for private buckets)
+            const { data: signedUrlData, error: signedError } = await supabase.storage
+              .from(BUCKET_NAME)
+              .createSignedUrl(file.name, 31536000); // 1 year expiry
 
-          return {
-            id: file.id || file.name,
-            name: file.name,
-            url: urlData.publicUrl,
-            createdAt: file.created_at,
-            updatedAt: file.updated_at
-          };
+            if (!signedError && signedUrlData?.signedUrl) {
+              return {
+                id: file.id || file.name,
+                name: file.name,
+                url: signedUrlData.signedUrl,
+                createdAt: file.created_at,
+                updatedAt: file.updated_at
+              };
+            }
+
+            // Fallback to public URL if signed URL fails
+            const { data: urlData } = supabase.storage
+              .from(BUCKET_NAME)
+              .getPublicUrl(file.name);
+
+            return {
+              id: file.id || file.name,
+              name: file.name,
+              url: urlData.publicUrl,
+              createdAt: file.created_at,
+              updatedAt: file.updated_at
+            };
+          } catch (error) {
+            console.error(`Error getting URL for ${file.name}:`, error);
+            // Return null to filter out failed videos
+            return null;
+          }
         })
     );
 
+    // Filter out any null values (failed video URLs)
+    const validVideos = videos.filter(video => video !== null);
+
     // If no videos after filtering, use fallback
-    if (videos.length === 0) {
+    if (validVideos.length === 0) {
       console.log('No video files found after filtering, using fallback videos');
       return getFallbackVideos();
     }
 
-    return videos;
+    return validVideos;
   } catch (error) {
     console.error('Error in fetchVideosFromBucket:', error);
     // Return fallback videos with provided URLs if Supabase fails

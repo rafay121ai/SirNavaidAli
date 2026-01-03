@@ -3,26 +3,60 @@ import React, { useState, useRef, useEffect } from 'react';
 const VideoPlayer = ({ videoUrl, videoName, className = '' }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [shouldLoad, setShouldLoad] = useState(false);
   const videoRef = useRef(null);
+  const containerRef = useRef(null);
+
+  // Lazy load video when it comes into view
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setShouldLoad(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { rootMargin: '50px' } // Start loading 50px before video is visible
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   useEffect(() => {
     const video = videoRef.current;
-    if (video) {
+    if (video && shouldLoad) {
       const handleLoadedData = () => setIsLoading(false);
+      const handleCanPlay = () => setIsLoading(false);
       const handlePlay = () => setIsPlaying(true);
       const handlePause = () => setIsPlaying(false);
+      const handleError = () => {
+        console.error('Video error:', video.error);
+        setIsLoading(false);
+      };
 
       video.addEventListener('loadeddata', handleLoadedData);
+      video.addEventListener('canplay', handleCanPlay);
       video.addEventListener('play', handlePlay);
       video.addEventListener('pause', handlePause);
+      video.addEventListener('error', handleError);
 
       return () => {
         video.removeEventListener('loadeddata', handleLoadedData);
+        video.removeEventListener('canplay', handleCanPlay);
         video.removeEventListener('play', handlePlay);
         video.removeEventListener('pause', handlePause);
+        video.removeEventListener('error', handleError);
       };
     }
-  }, []);
+  }, [shouldLoad]);
 
   const togglePlay = () => {
     const video = videoRef.current;
@@ -40,16 +74,27 @@ const VideoPlayer = ({ videoUrl, videoName, className = '' }) => {
   };
 
   return (
-    <div className={`video-player-wrapper ${className}`}>
+    <div className={`video-player-wrapper ${className}`} ref={containerRef}>
       <div className="video-container" onClick={handleVideoClick}>
-        <video
-          ref={videoRef}
-          src={videoUrl}
-          className="video-element"
-          playsInline
-          loop
-          muted
-        />
+        {shouldLoad ? (
+          <video
+            ref={videoRef}
+            src={videoUrl}
+            className="video-element"
+            playsInline
+            loop
+            muted
+            preload="metadata"
+            onError={(e) => {
+              console.error('Video loading error:', e);
+              setIsLoading(false);
+            }}
+          />
+        ) : (
+          <div className="video-placeholder" style={{ width: '100%', height: '100%', background: '#f0f0f0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div className="spinner"></div>
+          </div>
+        )}
         {isLoading && (
           <div className="video-loading">
             <div className="spinner"></div>
