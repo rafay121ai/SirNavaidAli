@@ -1,0 +1,398 @@
+/**
+* Responsive CSS
+* Mobile-first responsive styles for Navaid Physics Academy
+**/
+
+/* Tablet and Below */
+@media only screen and (max-width: 991px) {
+    /* Header */
+    .react-header {
+        position: relative;
+        z-index: 1000;
+
+        .logo img {
+            max-height: 70px;
+        }
+
+        .menu-toggle {
+            justify-content: space-between;
+            
+            .mobile-menu-btn {
+                display: flex;
+                margin-left: auto;
+                order: 2;
+            }
+        }
+
+        .react-main-menu {
+            position: relative;
+            z-index: 1001;
+        }
+
+        .react-inner-menus {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 0 0 10px 10px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+
+            &.menu-open {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+
+            .react-menus {
+                flex-direction: column;
+                width: 100%;
+                padding: 20px;
+
+                li {
+                    width: 100%;
+                    margin-bottom: 10px;
+
+                    a {
+                        padding: 15px 20px;
+                        display: block;
+                        font-size: 16px;
+                        font-weight: 600;
+                        color: #FF6B35;
+                        transition: all 0.3s ease;
+                        border-radius: 8px;
+                        text-align: center;
+
+                        &:hover {
+                            color: #D2093C;
+                            background: rgba(255, 107, 53, 0.1);
+                        }
+                    }
+
+                    &.nav-btn {
+                        margin-top: 15px;
+                        padding-top: 15px;
+                        border-top: 1px solid #eee;
+
+                        a {
+                            background: linear-gradient(135deg, #FF6B35, #FF8C42);
+                            color: white !important;
+                            border-radius: 8px;
+                            padding: 15px 20px !important;
+                            font-weight: 700;
+                            text-transform: uppercase;
+                            letter-spacing: 0.5px;
+
+                            &:hover {
+                                background: linear-gradient(135deg, #FF8C42, #FF9F4A);
+                            }
+                        }
+
+                        &.signup-btn a {
+                            background: white;
+                            color: #FF6B35 !important;
+                            border: 2px solid #FF6B35;
+
+                            &:hover {
+                                background: #FF6B35;
+                                color: white !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /* Typography */
+    .react__title__section h2 {
+        font-size: 36px;
+        line-height: 42px;
+    }
+
+    .about__area h2 {
+        font-size: 36px;
+        line-height: 42px;
+    }
+
+    /* Course Grid */
+    .react-course-filter .single-studies {
+        margin-bottom: 30px;
+    }
+
+    /* Footer */
+    .react-footer .footer-top {
+        padding: 60px 0 40px;
+    }
+
+    .react-footer .footer-top .footer-widget {
+        margin-bottom: 30px;
+    }
+
+    /* Login/Signup */
+    .react-login-page .login-right-form {
+        padding: 30px;
+    }
+
+    /* Contact */
+    .react-contact-page .react-blog-form {
+        padding-left: 0;
+        margin-top: 30px;
+    }
+}
+
+/* Mobile */
+@media screen and (max-width: 767px) {
+    /* Typography */
+    h1 { font-size: 36px; }
+    h2 { font-size: 30px; }
+    h3 { font-size: 24px; }
+
+    .react__title__section h2 {
+        font-size: 30px;
+        line-height: 36px;
+    }
+
+    .react__title__section h6 {
+        font-size: 16px;
+    }
+
+    /* Header */
+    .react-header .logo img {
+        max-height: 60px;
+    }
+
+    /* About */
+    .about__area {
+        &.about__area_one {
+            .about__content {
+                padding-top: 30px;
+                padding-left: 0;
+            }
+
+            ul {
+                flex-direction: column;
+                gap: 15px;
+
+                li.last-li {
+                    margin-left: 0;
+                    padding-left: 0;
+                    background: none;
+                }
+            }
+        }
+    }
+
+    /* Courses */
+    .styled-course-card {
+        .card-header {
+            padding: 20px;
+
+            .course-title {
+                font-size: 20px;
+            }
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-footer {
+            padding: 0 20px 20px;
+        }
+    }
+
+    .simple-course-card {
+        padding: 25px;
+
+        .course-title {
+            font-size: 18px;
+        }
+
+        .course-info {
+            .info-item {
+                font-size: 14px;
+            }
+        }
+
+        .register-btn {
+            padding: 12px 25px;
+            font-size: 15px;
+        }
+    }
+
+    /* Video Cards */
+    .video-card {
+        .video-thumbnail {
+            height: 200px;
+        }
+
+        .video-content {
+            padding: 20px;
+        }
+    }
+
+    /* Topics Loop Scroll */
+    .scroll-item .scroll-text {
+        font-size: 16px;
+    }
+
+    /* Testimonials */
+    .student_satisfaction-section {
+        padding-top: 60px;
+        padding-bottom: 60px;
+
+        .count__area2 {
+            padding-top: 50px;
+
+            .container ul li {
+                border-right: none;
+                border-bottom: 1px solid rgba(15, 18, 22, 0.08);
+                padding: 20px 0;
+
+                &:last-child {
+                    border-bottom: none;
+                }
+            }
+
+            .count__content .text {
+                span, em {
+                    font-size: 36px;
+                    line-height: 40px;
+                }
+
+                p {
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+
+    /* Footer */
+    .react-footer .copyright .container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    /* Login/Signup */
+    .react-login-page {
+        .login-left-content {
+            margin-bottom: 30px;
+
+            h1 {
+                font-size: 36px;
+            }
+        }
+
+        .login-right-form {
+            padding: 25px;
+        }
+    }
+
+    /* Contact */
+    .react-contact-page .address-sec {
+        padding: 25px;
+        margin-bottom: 30px;
+    }
+}
+
+/* Small Mobile */
+@media screen and (max-width: 575px) {
+    /* Typography */
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    h3 { font-size: 20px; }
+
+    .react__title__section h2 {
+        font-size: 24px;
+        line-height: 30px;
+    }
+
+    /* Header */
+    .react-header .topbar-area.style1 {
+        .topbar-contact ul {
+            flex-direction: column;
+            gap: 10px;
+
+            li {
+                margin-left: 0;
+            }
+        }
+    }
+
+    /* Courses */
+    .styled-course-card {
+        .card-header {
+            padding: 15px;
+
+            .course-title {
+                font-size: 18px;
+            }
+        }
+    }
+
+    /* Reviews */
+    .review-card {
+        padding: 15px;
+
+        .review-header .student-info .student-avatar {
+            width: 40px;
+            height: 40px;
+        }
+    }
+
+    /* Testimonials */
+    .student_satisfaction-section {
+        .count__area2 .count__content .text {
+            span, em {
+                font-size: 28px;
+                line-height: 32px;
+            }
+        }
+    }
+
+    /* Login/Signup */
+    .react-login-page {
+        .login-left-content h1 {
+            font-size: 28px;
+        }
+
+        .login-right-form {
+            padding: 20px;
+        }
+    }
+}
+
+/* Extra Responsive Adjustments */
+@media only screen and (max-width: 1200px) {
+    .react-course-filter .single-studies .inner-course .case-content .case-title {
+        font-size: 18px;
+        margin: 6px 0 18px;
+    }
+
+    .react-footer .footer-top-cta {
+        padding: 40px 30px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .about-page-header {
+        .about-page-title {
+            font-size: 24px;
+        }
+
+        .about-page-subtitle {
+            font-size: 12px;
+        }
+    }
+
+    .scroll-item .scroll-text {
+        font-size: 14px;
+        padding: 15px 30px;
+    }
+}

@@ -1,0 +1,191 @@
+/* Responsive Menu Styles
+----------------------------------------*/
+ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+.react-menus {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.react-menus li {
+    list-style: none;
+    position: relative;
+}
+
+.react-menus li > a {
+    color: #c0c0c0;
+}
+
+.react-menus > li > a {
+    display: block;
+    position: relative;
+    margin: 0;
+    padding: 15px 20px 15px 20px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+body.react-one-page .react-menus > li > a {
+    padding: 15px 16px 15px 16px;
+}
+
+.react-menus li:hover > a,
+.react-menus li.menu-active > a {
+    color: #FF6B35;
+}
+
+.react-menus li ul.sub-menu li:hover > a,
+.react-menus li ul.sub-menu li.menu-active > a {
+    color: #FF6B35;
+}
+
+/* Submenu Styles */
+.react-menus > li > ul.sub-menu {
+    list-style: none;
+    clear: both;
+    margin: 0;
+    position: absolute;
+    z-index: 999;
+    border-radius: 0 0 4px 4px;
+}
+
+.react-menus li ul.sub-menu {
+    background: #fff;
+    padding: 18px 0 18px;
+    box-shadow: 30px 0 30px rgba(8, 10, 41, .10);
+}
+
+.react-menus li ul.sub-menu > li {
+    width: 200px;
+}
+
+.react-menus li ul.sub-menu li a {
+    display: block;
+    margin: 0px 0px;
+    padding: 5px 35px 5px 35px;
+    text-decoration: none;
+    font-weight: normal;
+    background: none;
+    color: #0a0a0a;
+}
+
+.react-menus > li > ul.sub-menu > li ul.sub-menu > li ul.sub-menu {
+    position: absolute;
+    left: 100%;
+    top: 0px;
+    display: none;
+    list-style: none;
+}
+
+.react-menus > li.edge > ul.sub-menu {
+    right: 0;
+}
+
+.react-menus li ul.sub-menu li.edge ul.sub-menu,
+.react-menus > li > ul.sub-menu > li.edge ul.sub-menu > li.edge ul.sub-menu {
+    left: -100% !important;
+}
+
+/* Login/Signup Button Styles in Navbar */
+.react-menus > li.nav-btn {
+    margin-left: 10px;
+}
+
+.react-menus > li .login-btn,
+.react-menus > li .signup-btn {
+    background: linear-gradient(135deg, #FF6B35 0%, #FF8C42 100%);
+    color: white !important;
+    border-radius: 6px;
+    padding: 10px 20px !important;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+
+    &:hover {
+        background: linear-gradient(135deg, #FF8C42 0%, #FF9F4A 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+    }
+}
+
+.react-menus > li .signup-btn {
+    background: white;
+    color: #FF6B35 !important;
+    border: 2px solid #FF6B35;
+
+    &:hover {
+        background: #FF6B35;
+        color: white !important;
+        border-color: #FF6B35;
+    }
+}
+
+/* Menu Toggle Button for Mobile */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+
+    .icon-bar {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background-color: #FF6B35;
+        margin: 5px 0;
+        transition: 0.3s;
+    }
+}
+
+@media (max-width: 991px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .react-menus {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+
+        &.show {
+            display: block;
+        }
+
+        > li {
+            display: block;
+            width: 100%;
+
+            > a {
+                padding: 10px 15px;
+            }
+        }
+
+        li ul.sub-menu {
+            position: relative;
+            box-shadow: none;
+            padding-left: 15px;
+
+            > li {
+                width: 100%;
+            }
+        }
+    }
+
+    .react-menus > li.nav-btn {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+}
