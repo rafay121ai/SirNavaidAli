@@ -98,7 +98,7 @@ export const getSignedVideoUrl = async (fileName) => {
  * Fallback videos using the provided URLs
  * @returns {Array} Array of video objects
  */
-const getFallbackVideos = () => {
+export const getFallbackVideos = () => {
   return [
     {
       id: '1',

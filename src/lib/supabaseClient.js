@@ -8,5 +8,5 @@ const supabaseAnonKey = process.env.REACT_APP_SUPABASE_ANON_KEY || ''
 // but the app will use fallback videos from videoService.js
 export const supabase = createClient(
   supabaseUrl,
-  supabaseAnonKey
+  supabaseAnonKey || 'dummy-key-for-initialization'
 )

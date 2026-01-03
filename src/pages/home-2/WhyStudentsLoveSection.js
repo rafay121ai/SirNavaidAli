@@ -11,9 +11,17 @@ const WhyStudentsLoveSection = () => {
             try {
                 setLoading(true);
                 const fetchedVideos = await fetchVideosFromBucket();
-                setVideos(fetchedVideos);
+                setVideos(fetchedVideos || []);
             } catch (error) {
                 console.error('Error loading videos:', error);
+                // Import and use fallback videos on error
+                try {
+                    const { getFallbackVideos } = await import('../../lib/videoService');
+                    setVideos(getFallbackVideos());
+                } catch (fallbackError) {
+                    console.error('Error loading fallback videos:', fallbackError);
+                    setVideos([]);
+                }
             } finally {
                 setLoading(false);
             }
